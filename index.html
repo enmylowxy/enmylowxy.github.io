@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Хехе</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-image: url(fon.gif);
+      background-repeat: no-repeat;
+      background-size: cover;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    .button {
+      background-color: #fff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+    }
+
+    .image-container {
+      position: fixed;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+
+    .image-container img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 70%;
+      max-height: 70%;
+    }
+
+    .text-container {
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <button class="button" onclick="changeBackground()">Сменить тему</button>
+
+  <div class="text-container">
+    <p>Савелло Ксения</p>
+    <p>АДБ-21-11</p>
+  </div>
+
+  <div class="image-container">
+    <img src="photo1.jpg" alt="Photo 1">
+  </div>
+
+  <script>
+
+    var wantJoke = confirm("Хотите анекдот?");
+    if (wantJoke) {
+      alert("Идёт мужик по полю, нашёл подкову, думает: возьму домой на удачу. Приходит домой, достает подкову, чтобы повесить над дверью, переворачивает, а там конь.");
+    } else {
+      alert(":(");
+    }
+
+    function changeBackground() {
+      var body = document.body;
+      if (body.style.backgroundColor === 'black') {
+        body.style.backgroundColor = 'white';
+        body.style.color = 'black';
+      } else {
+        body.style.backgroundColor = 'black';
+        body.style.color = 'white';
+      }
+    }
+
+
+  </script>
+</body>
+</html>
