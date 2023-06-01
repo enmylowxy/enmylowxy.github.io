@@ -10,14 +10,38 @@
       margin: 0;
       padding: 0;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
       background-image: url(fon.gif);
       background-repeat: no-repeat;
       background-size: cover;
       transition: background-color 0.5s, color 0.5s;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+    }
+
+    .text-container {
+      flex: 1;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+
+    .image-container {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 100%;
     }
 
     .button {
@@ -27,50 +51,44 @@
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      position: fixed;
-      top: 20px;
+top: 20px;
       left: 20px;
     }
 
-    .image-container {
+    .button-container {
       position: fixed;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
+  top: 20px;
+  left: 20px;
     }
 
-    .image-container img {
-      display: block;
-      width: auto;
-      height: auto;
-      max-width: 70%;
-      max-height: 70%;
+    #demo li {
+      font-size: 12px;
     }
 
-    .text-container {
-      position: fixed;
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-      font-size: 24px;
-      text-transform: uppercase;
-    }
   </style>
 </head>
 <body>
-  <button class="button" onclick="changeBackground()">Сменить тему</button>
+  <div class="container">
+<div class="button-container">
+        <button class="button" onclick="changeBackground()">Сменить тему</button>
+      </div>
+    <div class="text-container">
+      <p>Савелло Ксения</p>
+	<p>Адб-21-11</p>
+  <div class="main">
+            <h6>JavaScript Confirm Box</h6>
+            <button class="btn" onclick="myFunction()">Try it</button>
+            <ul id="demo">
 
-  <div class="text-container">
-    <p>Савелло Ксения</p>
-    <p>АДБ-21-11</p>
-  </div>
-
-  <div class="image-container">
-    <img src="photo1.jpg" alt="Photo 1">
+            </ul>
+        </div>
+    </div>
+    <div class="image-container">
+      <img src="photo1.jpg" alt="Photo 1">
+    </div>
   </div>
 
   <script>
-
     var wantJoke = confirm("Хотите анекдот?");
     if (wantJoke) {
       alert("Идёт мужик по полю, нашёл подкову, думает: возьму домой на удачу. Приходит домой, достает подкову, чтобы повесить над дверью, переворачивает, а там конь.");
@@ -88,6 +106,35 @@
         body.style.color = 'white';
       }
     }
+
+   function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+
+            function myFunction() {
+  (async () => {
+    let response = await fetch('https://kav-api.kovalev.team/servodrive/lastActualData?servoDriveId=1');
+    let el = document.getElementById('demo');
+    let text = await response.text(); // прочитать тело ответа как текст
+    let data = JSON.parse(text)[0];
+    
+    for (const [key, value] of Object.entries(data)) {
+      let existingItem = document.querySelector(`li[data-key="${key}"]`);
+      
+      if (existingItem) {
+        existingItem.textContent = `${key}: ${value}`;
+      } else {
+        const newEl = document.createElement("li");
+        newEl.setAttribute('data-key', key);
+        newEl.appendChild(document.createTextNode(`${key}: ${value}`));
+        el.appendChild(newEl);
+      }
+      
+      await sleep(100);
+    }
+  })()
+}
 
 
   </script>
